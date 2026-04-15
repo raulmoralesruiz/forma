@@ -8,6 +8,7 @@ export class FormaStore {
 		targetBodyFat: 20
 	});
 	summaryMetrics = $state<string[]>(['weight', 'bodyFat', 'muscleMass', 'bmi']);
+	comparisonMetrics = $state<string[]>(['weight', 'bodyFat', 'muscleMass', 'visceralFat']);
 	isDark = $state(false);
 
 	constructor() {
@@ -15,10 +16,12 @@ export class FormaStore {
 			const savedData = localStorage.getItem('forma_data');
 			const savedGoals = localStorage.getItem('forma_goals');
 			const savedMetrics = localStorage.getItem('forma_summary_metrics');
+			const savedCompMetrics = localStorage.getItem('forma_comparison_metrics');
 			
 			if (savedData) this.data = JSON.parse(savedData);
 			if (savedGoals) this.goals = JSON.parse(savedGoals);
 			if (savedMetrics) this.summaryMetrics = JSON.parse(savedMetrics);
+			if (savedCompMetrics) this.comparisonMetrics = JSON.parse(savedCompMetrics);
 		}
 	}
 
@@ -59,6 +62,11 @@ export class FormaStore {
 		this.save();
 	}
 
+	setComparisonMetric(index: number, key: string) {
+		this.comparisonMetrics[index] = key;
+		this.save();
+	}
+
 	toggleTheme() {
 		this.isDark = !this.isDark;
 		this.applyTheme();
@@ -77,6 +85,7 @@ export class FormaStore {
 			localStorage.setItem('forma_data', JSON.stringify(this.data));
 			localStorage.setItem('forma_goals', JSON.stringify(this.goals));
 			localStorage.setItem('forma_summary_metrics', JSON.stringify(this.summaryMetrics));
+			localStorage.setItem('forma_comparison_metrics', JSON.stringify(this.comparisonMetrics));
 		}
 	}
 
