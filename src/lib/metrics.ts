@@ -8,7 +8,9 @@ import {
     Flame,
     User, 
     Dna, 
-    TrendingUp 
+    TrendingUp, 
+    Weight,
+    Stethoscope
 } from "lucide-svelte";
 import type { BodyMetrics } from "./csvParser";
 
@@ -35,22 +37,6 @@ export const METRICS: MetricConfig[] = [
         format: (v) => v.toFixed(1)
     },
     {
-        key: 'bodyFat',
-        label: 'Body Fat',
-        unit: '%',
-        icon: Percent,
-        inverse: true,
-        format: (v) => v.toFixed(1)
-    },
-    {
-        key: 'muscleMass',
-        label: 'Muscle',
-        unit: 'kg',
-        icon: Activity,
-        inverse: false,
-        format: (v) => v.toFixed(1)
-    },
-    {
         key: 'bmi',
         label: 'BMI',
         unit: '',
@@ -62,41 +48,105 @@ export const METRICS: MetricConfig[] = [
         key: 'visceralFat',
         label: 'Visceral Fat',
         unit: '',
-        icon: Flame,
+        icon: Stethoscope,
         inverse: true,
         format: (v) => v.toFixed(0)
     },
     {
-        key: 'heartRate',
-        label: 'Heart Rate',
-        unit: 'bpm',
-        icon: Heart,
+        key: 'bodyFat',
+        label: 'Body Fat',
+        unit: '%',
+        icon: Percent,
         inverse: true,
-        format: (v) => v.toFixed(0)
+        format: (v) => v.toFixed(1)
+    },
+    {
+        key: 'musclePercentage',
+        label: 'Muscle',
+        unit: '%',
+        icon: Percent,
+        inverse: false,
+        format: (v) => v.toFixed(1)
+    },
+    {
+        key: 'waterPercentage',
+        label: 'Water',
+        unit: '%',
+        icon: Percent,
+        inverse: false,
+        format: (v) => v.toFixed(1)
+    },
+    {
+        key: 'proteinPercentage',
+        label: 'Protein',
+        unit: '%',
+        icon: Percent,
+        inverse: false,
+        format: (v) => v.toFixed(1)
+    },
+    {
+        key: 'bonePercentage',
+        label: 'Bone',
+        unit: '%',
+        icon: Percent,
+        inverse: false,
+        format: (v) => v.toFixed(1)
+    },
+    {
+        key: 'muscleMass',
+        label: 'Muscle',
+        unit: 'kg',
+        icon: Weight,
+        inverse: false,
+        format: (v) => v.toFixed(1)
     },
     {
         key: 'waterMass',
-        label: 'Water Mass',
+        label: 'Water',
         unit: 'kg',
-        icon: Droplets,
+        icon: Weight,
+        inverse: false,
+        format: (v) => v.toFixed(1)
+    },
+    {
+        key: 'fatMass',
+        label: 'Fat',
+        unit: 'kg',
+        icon: Weight,
+        inverse: true,
+        format: (v) => v.toFixed(1)
+    },
+    {
+        key: 'proteinMass',
+        label: 'Protein',
+        unit: 'kg',
+        icon: Weight,
         inverse: false,
         format: (v) => v.toFixed(1)
     },
     {
         key: 'boneMass',
-        label: 'Bone Mass',
+        label: 'Bone',
         unit: 'kg',
-        icon: Zap,
+        icon: Weight,
         inverse: false,
         format: (v) => v.toFixed(1)
     },
     {
-        key: 'metabolicIndex',
-        label: 'Basal Met.',
-        unit: 'kcal',
-        icon: Zap,
+        key: 'skeletalMuscleMass',
+        label: 'Skel. Muscle',
+        unit: 'kg',
+        icon: Weight,
         inverse: false,
-        format: (v) => v.toFixed(0)
+        format: (v) => v.toFixed(1)
+    },
+    {
+        key: 'fatFreeMass',
+        label: 'Fat Free Mass',
+        unit: 'kg',
+        icon: Weight,
+        inverse: false,
+        format: (v) => v.toFixed(1)
     },
     {
         key: 'bodyAge',
@@ -107,76 +157,28 @@ export const METRICS: MetricConfig[] = [
         format: (v) => v.toFixed(0)
     },
     {
-        key: 'skeletalMuscleMass',
-        label: 'Skel. Muscle',
-        unit: 'kg',
-        icon: Dna,
-        inverse: false,
-        format: (v) => v.toFixed(1)
-    },
-    {
         key: 'waistHipRatio',
         label: 'WHR',
         unit: '',
-        icon: TrendingUp,
+        icon: Dna,
         inverse: true,
         format: (v) => v.toFixed(2)
     },
     {
-        key: 'fatMass',
-        label: 'Fat Mass',
-        unit: 'kg',
-        icon: Scale,
+        key: 'heartRate',
+        label: 'Heart Rate',
+        unit: 'bpm',
+        icon: Heart,
         inverse: true,
-        format: (v) => v.toFixed(1)
+        format: (v) => v.toFixed(0)
     },
     {
-        key: 'proteinMass',
-        label: 'Protein Mass',
-        unit: 'kg',
-        icon: Activity,
-        inverse: false,
-        format: (v) => v.toFixed(1)
-    },
-    {
-        key: 'musclePercentage',
-        label: 'Muscle %',
-        unit: '%',
-        icon: Activity,
-        inverse: false,
-        format: (v) => v.toFixed(1)
-    },
-    {
-        key: 'waterPercentage',
-        label: 'Water %',
-        unit: '%',
-        icon: Droplets,
-        inverse: false,
-        format: (v) => v.toFixed(1)
-    },
-    {
-        key: 'proteinPercentage',
-        label: 'Protein %',
-        unit: '%',
-        icon: Activity,
-        inverse: false,
-        format: (v) => v.toFixed(1)
-    },
-    {
-        key: 'bonePercentage',
-        label: 'Bone %',
-        unit: '%',
+        key: 'metabolicIndex',
+        label: 'Basal Met.',
+        unit: 'kcal',
         icon: Zap,
         inverse: false,
-        format: (v) => v.toFixed(1)
-    },
-    {
-        key: 'fatFreeMass',
-        label: 'Fat Free Mass',
-        unit: 'kg',
-        icon: Scale,
-        inverse: false,
-        format: (v) => v.toFixed(1)
+        format: (v) => v.toFixed(0)
     }
 ];
 
